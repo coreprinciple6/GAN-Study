@@ -8,8 +8,8 @@ CycleGAN was used for a Generative Art competition in [Kaggle](https://www.kaggl
 
 * [Introduction](#introduction)
 * [CycleGAN](#cyclegan)
-  -[Dataset](#dataset)
-  -[Theory](#theory)
+    * [Dataset](#dataset)
+    * [Theory](#theory)
 * [Results](#results)
 
 ## Introduction
@@ -40,16 +40,11 @@ It trains two generators and two discriminators as opposed to one in a normal GA
 As visualized by the above picture, images from Domain A is fed to G<sub>AB</sub> (first generator) and the resultant images are of Domain B. Conversely, images from Domain B is fed to G<sub>BA</sub> (second generator) which outputs images from Domain A. The two discriminators are used to identify if the images are *real* or *fake*.
 
 
-The loss is calculated with every epoch and the model is updated accordingly. Another unique concept associated with cycleGAN is **Cycle Consistency**. This concept suggests that the output of the first generator can be fed to the second generator whose output in turn, should theoreticslly, look the same as the initial inout of the first generator.
-The CycleGAN uses an additional extension to the architecture called cycle consistency. This is the idea that an image output by the first generator could be used as input to the second generator and the output of the second generator should match the original image. The reverse is also true: that an output from the second generator can be fed as input to the first generator and the result should match the input to the second generator. To demonstrate with an example , lets take the case of our project. Images from Monet dataset is used to train Generator A which results 'fake'  images that look alot like the photos in the seccond dataset. If these 'fake' images are given as input to the second generator, it should(as discussed above) produce images of scenaries that look 'Monesque'. Now ideally , we would expect exact likeness to that of the first datatset, but machine learning is rarely ever 100% accurate. There is always 
+The loss is calculated with every epoch and the model is updated accordingly. Another unique concept associated with cycleGAN is **Cycle Consistency**. This concept suggests that the output of the first generator can be fed to the second generator whose output in turn, should theoretically, look the same as the initial input of the first generator. The reverse is also true: that an output from the second generator can be fed as input to the first generator and the result should match the input to the second generator.
 
-Cycle consistency is a concept from machine translation where a phrase translated from English to French should translate from French back to English and be identical to the original phrase. The reverse process should also be true.
 
-… we exploit the property that translation should be “cycle consistent”, in the sense that if we translate, e.g., a sentence from English to French, and then translate it back from French to English, we should arrive back at the original sentence
-
-— Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks, 2017.
-
+To demonstrate with an example , lets take the case of our project. Images from Monet dataset is used to train Generator A which results 'fake'  images that look alot like the photos in the seccond dataset. If these 'fake' images are given as input to the second generator, it should(as discussed above) produce images of scenaries that look 'Monesque'. Now ideally , we would expect exact likeness to that of the first datatset, but machine learning is rarely ever 100% accurate.Theres always a loss in the equation.
 The CycleGAN encourages cycle consistency by adding an additional loss to measure the difference between the generated output of the second generator and the original image, and the reverse. This acts as a regularization of the generator models, guiding the image generation process in the new domain toward image translation.
 
-
 ## Results 
+ The given notebook includes a working code for cycleGAN using Tensorflow. It was trained for 100 epochs in kaggle using TPU. The trained model scored 48.3(top score: 34) in the competition.
